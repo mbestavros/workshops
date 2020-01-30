@@ -1,6 +1,8 @@
-# Intro to the Command Line
+# Linux Command Line for Everyone!
 
-Welcome to the BUILDS Command Line workshop! The goal of this workshop is to get you acquainted with the Unix-based command line, an extremely important and integral tool that will prove useful well beyond your academic career. Command line tools are used everywhere: from ``git`` to ``gsubmit`` and everything in between. It may look intimidating, and it can be a bit hard to learn, but it's well worth the time investment, especially if you work in software. If you just want to look like a ``l33t_h4x0r``, open http://hackertyper.net/ and type away.
+Welcome to Red Hat's Linux Command Line workshop for TechTogether 2020! The main goal of this workshop is to get you acquainted with the Unix-based terminal. Command line tools are used everywhere -- not just in academia, but in the professional software world, too. And don't just take it from us: ask developers from any software company and they'll likely tell you they use the Unix terminal all the time. It may look intimidating, and it can be a bit hard to learn, but it's well worth the time investment. It will pay dividends well into your future.
+
+This workshop is an extension and revision of the [BUILDS command line workshop](https://github.com/BUILDS-/builds-workshops/tree/master/command_line) that I substantially contributed to, along with former president Sean Smith.
 
 **A few notes before we begin:**
 
