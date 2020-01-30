@@ -5,7 +5,7 @@ For years, the default answer was simply to install Linux... or get a Mac. Neith
 
 Enter the **Windows Subsystem for Linux**, often abbreviated as **"WSL."**
 
-Put simply, WSL allows you to run full-blown Linux distributions inside Windows, as if they were just another app like your browser or text editor. This is a _fantastic_ ability, allowing people to start using Linux's rich dev tools with little hassle. It's developed by Microsoft as an officially-supported part of Windows, and has only been around for a few years -- but in that time, it's proven to be the easiest way for Windows people to use Linux.
+Put simply, WSL allows you to run full-blown Linux inside Windows, as if it was just another app like your browser or text editor. This is a _fantastic_ ability, allowing people to start using Linux's rich dev tools with little hassle. It's developed by Microsoft as an officially-supported part of Windows, and has only been around for a few years -- but in that time, it's proven to be the easiest way for Windows people to use Linux.
 
 Today, we're going to run through how to set up and get started using it. This guide will mirror the [official guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10) very closely -- just with additional instructions or clarifications where needed for complete beginners, and with some handy additional quality-of-life tips at the end.
 
@@ -67,4 +67,53 @@ When complete, you should have a new app in your start menu called "Ubuntu". Hoo
 ## Setting up your Linux distro
 Every WSL distro needs to run through first-time setup before we can use it regularly. We'll start this process by opening the distro in our Start menu (it should be "Ubuntu" if you installed at TechTogether). This will open a Terminal window, and it'll tell you it's installing. This process will take some time, so if you get to this point early, help out your peers if they're a few steps behind!
 
-The terminal will 
+The terminal will spit out this message when it's done:
+
+```
+Installation successful!
+Please create a default UNIX user account. The username does not need to match your Windows username.
+For more information visit: https://aka.ms/wslusers
+Enter new UNIX username:
+```
+
+This is where you'll create your Linux user account (username and password). This does **not** need to match your Windows account! It will only be used by Linux, and can be named whatever you want. Type your preference into the terminal window and press enter.
+
+Next, it'll prompt you for a Unix password. This won't be used for anything security-sensitive, but you will need it if you use `sudo` (which you _will_), so it's one of the _only_ times you should choose something simple and easy-to-remember.
+
+Type in your preferred password (it won't show you the characters live on screen, but they are being read) and press Enter to confirm. Then, confirm your password again.
+
+Once done, things will finish up and the Linux command prompt will start. Hooray! You've got Linux!
+
+## Making Linux comfortable
+So you've got Linux. Now what? Before we dive into the [Linux terminal guide](../README.md), there are a few things you can do to make your Linux environment easier to use.
+
+### Accessing your Windows files with Linux
+By default, Linux does not have an easy way to get to your Windows files. This is annoying, since most of your work is probably stored in Windows to begin with. And, as a general rule, you should still store your WSL files inside Windows directories -- it causes less headache when you want to use those files with Windows applications (like your code editor, for example).
+
+There's an easy fix, however: we're going to create a **symbolic link** to our Windows home directory. You'll need to edit the following command with your Windows account name, but it will get you easy access to your entire user folder (including your Documents, Downloads, etc. folders):
+
+```bash
+ln -s "/mnt/c/Users/<your Windows account name>" home
+```
+
+So, for example, someone with a Windows account name of `johndoe` would enter this:
+
+```bash
+ln -s "/mnt/c/Users/johndoe" home
+```
+
+When you're done, you'll have a link called `home` within your Linux home directory to your Windows user folder, and all your Windows files. You can navigate into it like any directory (which we'll cover in the general Linux terminal portion of the workshop).
+
+### Keeping Ubuntu updated
+You're effectively running full Ubuntu now, and it gets its own updates like any Ubuntu Linux machine would. You can check for and install updates with the following command:
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+Keep in mind this will require WiFi, and can take some time.
+
+You may get some boilerplate prompt if this is your first time using `sudo`, which you should just accept. You will be prompted for your Linux password (remember, this is the new one you created as part of setup). When you hit enter, it'll prompt you with all the packages you'll be updating once they've been fetched, and likely ask for confirmation. You can do this by entering `y` and hitting Enter.
+
+## Congratulations!
+You're now running Linux on Windows!
