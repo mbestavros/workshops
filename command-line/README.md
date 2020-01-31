@@ -4,46 +4,64 @@ Welcome to Red Hat's Linux Command Line workshop for TechTogether 2020! The main
 
 This workshop is an extension and revision of the [BUILDS command line workshop](https://github.com/BUILDS-/builds-workshops/tree/master/command_line) that I substantially contributed to, along with former president Sean Smith.
 
-**A few notes before we begin:**
+Let's get started by opening up your terminal.
+- If you're on Windows, this will be "Ubuntu" if you've already set up the Windows Subsystem for Linux. (If you haven't done so, you can check out the guide in the `windows-subsystem-linux` directory [here](./windows-subsystem-linux/README.md).)
+	- An additional note: for the purposes of this workshop, you can assume that Linux instructions also apply to WSL, unless noted otherwise.
+- If you're on Mac, this will be your "Terminal" app (probably under "Utilities").
+- If you're on Linux, this will also be called "Terminal".
 
-- With the addition of the Windows Subsystem for Linux, Windows PCs can now follow along with this tutorial! There is a bit of extra setup required, which can be found [here.](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide) **Before doing this, ensure your installation is fully up-to-date, on build at least 1703.** Once this is set up, Windows users can follow along with the Linux instructions, as this system is essentially tantamount to running Ubuntu Linux. Any specific references to Windows computers will probably refer to quirks about this system (and there are a few).
+There's one quick command you'll need to run to get the materials you'll need for the workshop:
 
-- The `$` is used to denote a shell prompt and should not be typed in.
+```bash
+git clone https://github.com/mbestavros/workshops.git
+```
 
-Let's get going! The first step is to find your terminal; on Mac and Linux, this should be the "Terminal" app. On Windows, you'll need to find the "Windows Subsystem for Linux" program (it should be in your program list). Open it up.
+This will put the materials for this repository on your local computer. We'll be using them later.
 
-This repo contains some resources we'll need, so the first step is to clone this repo using ``git``. You'll want to type:
+## What is a terminal?
+A terminal, or command line, is a text-based interface for your computer. Instead of a mouse interacting with graphical elements on screen controlling what your computer does, a terminal accepts text-based commands line-by-line. You type in what you want to do (a command), press Enter, and the computer will do it. Most modern Unix-based systems will have a common set of commands available to accomplish most common actions you'd want to do on a computer; in fact, it's entirely possible to run these machines without ever using a GUI.
 
-	$ git clone https://github.com/BUILDS-/builds-workshops.git
+Because it tends to be a lot easier to develop things when you don't need to design UI along with it, a lot of widely-used developer tools run through the command line exclusively, and understanding how to use one will allow you to use these tools yourself.
 
-We'll start with basic navigation and file editing.
+For now, we'll start with the basics.
+
+## Navigation and File Editing
+Just like your graphical file explorer, you can use the command line to navigate your filesystem. It's probably one of the most common things you'll do with the terminal, so it's a great place to start.
+
+When you open up your terminal anew, you'll be placed in your "home" directory. It's where all your user's files are stored (like your Documents, Downloads, etc). By default, it's a little hard to tell this. Why don't we have a look around?
+
+Type `ls`, then press Enter. You'll see a list of all the files and folders in your home directory, including the `workshops` directory that we cloned as part of setup.
+
+	$ ls
+	workshops
+
+Hooray! You've just learned your first command. `ls` is shorthand for "list" (your files), and it does exactly that -- it lists all the files in your current directory. Keep that in your back pocket -- you'll probably want to use it a lot.
 
 ### Folder Structure
 
-Linux machines all have file paths that start from root or `/`. If you type in `pwd` you'll see the current working directory. If you've just opened your shell you'll likely be in what's called the home directory.
+Linux machines all have file paths that start from root or `/`. But where are we relative to that? Time to learn a new command!
+
+If you type in `pwd`, you'll see the current working directory. (**p**rint **w**orking **d**irectory)
 
 	$ pwd
 	/home/username
 
-This directory on a Mac is `/Users/[Username]` where `[Username]` is your username. On Linux it's usually `/home/[username]`.
+Like mentioned above, we're currently in our "home" directory. This can vary a bit across systems. On Mac, it's `/Users/[Username]`, where `[Username]` is your username. On Linux, it's usually `/home/[username]`.
 
-Since the home directory is accessed quite frequently, it's shortened to `~`. From now on we'll refer to folders as directores and we'll call your home directory `/home/username`. 
+Since the home directory is accessed quite frequently, it's shortened to `~`. From now on, we'll refer to folders as directores and we'll call your home directory `/home/username`. 
 
-To see the files in the current directory just type `ls`, this lists files in your current working directory. You may or may not have files in your home directory (if on Mac, you probably will). You'll see the `builds-workshops` folder we cloned earlier. You'll also see some of your own files:
-
-	$ ls
-	builds-workshops
-
-Now let's learn a new command: `cd`. This moves between folders, so let's say I type:
+Now, let's learn a new command: `cd`. This moves between directory (it's shorthand for **c**hange **d**irectory). Let's try it out:
 
 	$ cd ~
 
-That will navigate to my home directory. I can now type:
+That will navigate to your home directory. I can now type:
 
 	$ pwd
 	/home/username
 
-to see the directory you're currently in. Ok, let's go into the ``builds-workshops`` directory using ``cd builds-workshops``. Now, if you type `pwd`, you'll see that our directory has changed:
+to see the directory you're currently in. Nothing has changed from before, since we were in the home directory to begin with.
+
+Now, let's change directories for real. Go into the `workshops` directory using `cd workshops`. Now, if you type `pwd`, you'll see that our directory has changed:
 
 	$ pwd
 	/home/username/builds-workshops
