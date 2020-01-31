@@ -18,6 +18,8 @@ git clone https://github.com/mbestavros/workshops.git
 
 This will put the materials for this repository on your local computer. We'll be using them later.
 
+One final note: you'll be seeing a lot of commands in this workshop, some of them kind of long. You can choose to type them in manually or copy-paste them; if you choose the latter, you'll need to be aware that pasting in terminals uses a different keyboard shortcut than normal Ctrl+V sometimes. On Linux and Windows, you can paste into shells using Ctrl+Shift+V. Apple apparently doesn't change the shortcut, so that's nice.
+
 ## What is a terminal?
 A terminal, or command line, is a text-based interface for your computer. Instead of a mouse interacting with graphical elements on screen controlling what your computer does, a terminal accepts text-based commands line-by-line. You type in what you want to do (a command), press Enter, and the computer will do it. Most modern Unix-based systems will have a common set of commands available to accomplish most common actions you'd want to do on a computer; in fact, it's entirely possible to run these machines without ever using a GUI.
 
@@ -279,15 +281,15 @@ Your shell is now customized! You should see your welcome message when you open 
 
 If there are any other commands you'd like to run on shell start, you can dump them in your dotfiles. You can do some neat stuff with it.
 	
-## Package Managers: apt-get
+## Package Managers: apt
 
-On Windows and Ubuntu Linux (but not on Mac), you should by default have the ``apt-get`` package manager installed. This can be used to get command-line utilities. We'll get a few fun ones and then demonstrate how they work.
+On Windows and Ubuntu Linux (but not on Mac), you should by default have the ``apt`` package manager installed. This can be used to get command-line utilities. We'll get a few fun ones and then demonstrate how they work.
 
-	$ sudo apt-get install lolcat
-	$ sudo apt-get install python-pip
-	$ sudo apt-get install cowsay
+	$ sudo apt install lolcat
+	$ sudo apt install python-pip
+	$ sudo apt install cowsay
 
-You can get pretty much any command-line utility using apt-get.
+You can get pretty much any command-line utility using apt.
 
 ## Install lolcat and fortune (for Mac users)
 
