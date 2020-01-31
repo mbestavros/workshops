@@ -100,10 +100,10 @@ There's an easy fix, however: we're going to create a **symbolic link** to our W
 ln -s "/mnt/c/Users/<your Windows account name>" home
 ```
 
-So, for example, someone with a Windows account name of `johndoe` would enter this:
+So, for example, someone with a Windows account name of `janedoe` would enter this:
 
 ```bash
-ln -s "/mnt/c/Users/johndoe" home
+ln -s "/mnt/c/Users/janedoe" home
 ```
 
 When you're done, you'll have a link called `home` within your Linux home directory to your Windows user folder, and all your Windows files. You can navigate into it like any directory (which we'll cover in the general Linux terminal portion of the workshop).
