@@ -194,45 +194,6 @@ You can use the `cat` command to see your edited file.
 
 Vim is extremely powerful, and many people swear by it. I find it most useful to make small edits to things when I'm already in the command line; if I'm doing something more substantive, I'll use my code editor (I prefer VS Code).
 
-### SSH and SCP
-
-Now, let's learn about two very useful tools: ``ssh`` and ``scp``. ``ssh`` (short for "secure shell") is basically remote login: it allows a UNIX-based machine to connect to another UNIX-based machine and issue commands remotely. If you're a BU student, this is how you interact with the CSA servers here at BU. In fact, let's try logging in using ``ssh`` right now:
-
-	$ ssh [your_bu_username]@csa2.bu.edu
-
-(If you're not a BU student, you'll just need to substitute the server address for some other machine you can SSH into. We unfortunately don't have one to demonstrate.)
-	
-This will begin the process of remotely logging you into the CSA2 lab machine. Assuming you've already set an account up, you'll just need to enter your BU credentials and you're all set to go. (Don't worry if your password doesn't show up in the terminal window; that's intended behavior).
-
-You'll be presented with your CSA home directory. This is a UNIX system, so all the commands you've learned up to here still work! Explore around a little bit. When you're ready to go back to your local machine, just type ``exit``. The command history will clear, but you should still be in the same directory you started ``ssh`` from.
-
-Now, let's learn how to move a file from our local machine to ``csa2`` using ``scp`` (short for secure copy). This is especially useful if you have, for example, a homework file that you need to submit using ``gsubmit``.
-
-We have our text file `renamedagain.txt` in our current directory. Let's move it to the home directory on ``csa2`` with this command:
-
-	$ scp renamedagain.txt [your_bu_username]@csa2.bu.edu:~
-
-Just like with SSH, you'll be prompted for your login info. Once entered, it should copy up. Now, if we log in to ``csa2`` using ``ssh``, we should see your file right there!
-
-You can customize the remote directory you send the file to by changing the file path after the colon. Note, however, that the path must exist *before* you send the file up.
-
-### Symlinks
-
-Exit out of CSA if you haven't already, and go back to your home directory. Symlinks (short for "symbolic links") are essentially links to another file or directory on your file system. They act like whatever they point to.
-
-Symlinks are very handy for WSL users. Because of the way the Linux subsystem is implemented, Windows does not have direct access to the Linux filesystem. This means that any files we create in the Linux filesystem can only be used within Linux--however, any Windows files can be accessed by everyone. Thus, it is most useful to simply use Linux to interact with Windows files. Unfortunately, the file path for the Windows filesystem is convoluted, and tedious to use all the time. The solution is simple: create a symlink within your Linux home directory that links to your Windows home directory. Boom, you have direct access to all your Windows files.
-
-To create the symlink we want (on Windows), we use ``ln -s``:
-
-	$ ln -s [source file or directory] [symlink name]
-
-The Windows filesystem is mounted in Linux, so our C drive is stored at `/mnt/c`. Beyond that, it's just the path from within Windows.
-So, to create a symlink to my user directory in Windows, I would do this:
-
-	$ ln -s /mnt/c/Users/[windows-username] windows-home
-	
-This creates a symlink called `windows-home` that links to my Windows user directory. If I navigate inside, I get my Windows home directory! This process can be repeated for any directory you want.
-
 ## Customizing your Command Line
 
 Now we get into the really fun stuff: dotfiles. These are configuration files that dictate how your terminal works, and you can customize them deeply. Plus, it'll give us an opportunity to exercise the skills we've been working on!
@@ -291,7 +252,7 @@ On Windows and Ubuntu Linux (but not on Mac), you should by default have the ``a
 
 You can get pretty much any command-line utility using apt.
 
-## Install lolcat and fortune (for Mac users)
+### Install lolcat and fortune (for Mac users)
 
 On Mac, you need the Ruby gem installer to install lolcat. To install gem:
 
@@ -308,7 +269,7 @@ And colorize text super easily:
 
 	echo "I'm full of colors" | lolcat
 
-## Install fortune
+### Install fortune
 
 You'll need pip, to install pip go here: https://pip.pypa.io/en/stable/installing/
 
@@ -316,14 +277,14 @@ Then you can just do (on Windows too):
 
 	pip install fortune
 
-## Install cowsay
+### Install cowsay
 
 Install the following (already done on Windows):
 
 	install.packages("devtools")
 	devtools::install_github("sckott/cowsay")
 
-## Alternatively, use Homebrew for MacOS
+### Alternatively, use Homebrew for MacOS
 
 Install brew:
 
@@ -335,7 +296,7 @@ And install lolcat, cowsay, and fortune with brew:
 	$ brew install cowsay
 	$ brew install fortune
 
-## Putting it all together
+### Putting it all together
 
 Type the following for interesting quotes:
 
@@ -343,11 +304,52 @@ Type the following for interesting quotes:
 
 If you're feeling _really_ wild, put that command as your welcome message in your dotfile. Then, you'll get a fortune every time you open your terminal!
 
+## Congratulations! You can use the Linux terminal!
+
 And that's a wrap! Hopefully you found this workshop helpful. Practice and tinker in your spare time! You can do lots of cool stuff with the command line.
 
-If you're a BU student, I've left in an `ssh-keygen` guide below to make logging into CSA even easier. It's from prior versions of the workshop, and I won't be covering it live.
+I've left in a few sections from prior versions of the workshop that I won't be covering live in case people are interested in them. The `ssh` related guides will probably be most useful to BU people, thogh symlinks are universally applicable.
 
-## Login to CSA without a password
+### SSH and SCP
+
+Now, let's learn about two very useful tools: ``ssh`` and ``scp``. ``ssh`` (short for "secure shell") is basically remote login: it allows a UNIX-based machine to connect to another UNIX-based machine and issue commands remotely. If you're a BU student, this is how you interact with the CSA servers here at BU. In fact, let's try logging in using ``ssh`` right now:
+
+	$ ssh [your_bu_username]@csa2.bu.edu
+
+(If you're not a BU student, you'll just need to substitute the server address for some other machine you can SSH into. We unfortunately don't have one to demonstrate.)
+	
+This will begin the process of remotely logging you into the CSA2 lab machine. Assuming you've already set an account up, you'll just need to enter your BU credentials and you're all set to go. (Don't worry if your password doesn't show up in the terminal window; that's intended behavior).
+
+You'll be presented with your CSA home directory. This is a UNIX system, so all the commands you've learned up to here still work! Explore around a little bit. When you're ready to go back to your local machine, just type ``exit``. The command history will clear, but you should still be in the same directory you started ``ssh`` from.
+
+Now, let's learn how to move a file from our local machine to ``csa2`` using ``scp`` (short for secure copy). This is especially useful if you have, for example, a homework file that you need to submit using ``gsubmit``.
+
+We have our text file `renamedagain.txt` in our current directory. Let's move it to the home directory on ``csa2`` with this command:
+
+	$ scp renamedagain.txt [your_bu_username]@csa2.bu.edu:~
+
+Just like with SSH, you'll be prompted for your login info. Once entered, it should copy up. Now, if we log in to ``csa2`` using ``ssh``, we should see your file right there!
+
+You can customize the remote directory you send the file to by changing the file path after the colon. Note, however, that the path must exist *before* you send the file up.
+
+### Symlinks
+
+Exit out of CSA if you haven't already, and go back to your home directory. Symlinks (short for "symbolic links") are essentially links to another file or directory on your file system. They act like whatever they point to.
+
+Symlinks are very handy for WSL users. Because of the way the Linux subsystem is implemented, Windows does not have direct access to the Linux filesystem. This means that any files we create in the Linux filesystem can only be used within Linux--however, any Windows files can be accessed by everyone. Thus, it is most useful to simply use Linux to interact with Windows files. Unfortunately, the file path for the Windows filesystem is convoluted, and tedious to use all the time. The solution is simple: create a symlink within your Linux home directory that links to your Windows home directory. Boom, you have direct access to all your Windows files.
+
+To create the symlink we want (on Windows), we use ``ln -s``:
+
+	$ ln -s [source file or directory] [symlink name]
+
+The Windows filesystem is mounted in Linux, so our C drive is stored at `/mnt/c`. Beyond that, it's just the path from within Windows.
+So, to create a symlink to my user directory in Windows, I would do this:
+
+	$ ln -s /mnt/c/Users/[windows-username] windows-home
+	
+This creates a symlink called `windows-home` that links to my Windows user directory. If I navigate inside, I get my Windows home directory! This process can be repeated for any directory you want.
+
+### Login to CSA (or any ssh server) without a password
 
 To setup login to csa without entering a password. I'm going to give the concise version of :https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
 
