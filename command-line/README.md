@@ -2,7 +2,7 @@
 
 Welcome to Red Hat's Linux Command Line workshop for TechTogether 2020! The main goal of this workshop is to get you acquainted with the Unix-based terminal. Command line tools are used everywhere -- not just in academia, but in the professional software world, too. And don't just take it from us: ask developers from any software company and they'll likely tell you they use the Unix terminal all the time. It may look intimidating, and it can be a bit hard to learn, but it's well worth the time investment. It will pay dividends well into your future.
 
-This workshop is an extension and revision of the [BUILDS command line workshop](https://github.com/BUILDS-/builds-workshops/tree/master/command_line) that I substantially contributed to, along with former president Sean Smith.
+This workshop is an extension and revision of the [BUILDS command line workshop](https://github.com/BUILDS-/builds-workshops/tree/master/command_line) that I substantially contributed to, along with former president Sean Smith and other BUILDS members.
 
 Let's get started by opening up your terminal.
 - If you're on Windows, this will be "Ubuntu" if you've already set up the Windows Subsystem for Linux. (If you haven't done so, you can check out the guide in the `windows-subsystem-linux` directory [here](./windows-subsystem-linux/README.md).)
@@ -241,9 +241,42 @@ Now that your dotfile is done, you'll need to refresh your shell to see the chan
 Your shell is now customized! You should see your welcome message when you open up your shell, and if you used any of the advanced `ls` commands, they should work when you use `cd` or `clear`.
 
 If there are any other commands you'd like to run on shell start, you can dump them in your dotfiles. You can do some neat stuff with it.
+
+## Setting up your Git workspace
+It's almost a certainty you'll be using Git if you do any kind of software (quick plug for our Git workshop tomorrow morning where you can learn more!). With how many repositories I work on, I find it helpful to have a dedicated directory to dump my git clones in. Let's create one now.
+
+Wait... how do we create a directory? You guessed it, there's a command for that!
+
+Before we do, let's go home with `cd ~`. WSL people should change to their Windows home via the shortcut we created in the beginning of the workshop:
+
+	$ cd ~/home
+
+Now, let's create a new folder with `mkdir` (short for, you guessed it, **m**a**k**e**dir**ectory):
+
+	$ mkdir git
+
+All done! You now have a new folder in your home directory called "git". If someone asks you to `git clone` something, change here first to keep things tidy.
+
+### Speaking of keeping things tidy...
+...didn't we clone something outside of this directory? That's right, we cloned something to our home directory! Maybe we should clean that up.
+
+First, navigate back to your home directory with `cd ~`. If you `ls`, you'll probably see the `workshops` folder that we were using earlier.
+
+We could move it to our new Git directory with `mv`:
+
+	$ mv workshops ~/git/workshops
+
+Or, if you prefer, we could delete it. But how? You guessed it, there's a command for that!
+
+You can delete individual files with `rm` (short for **r**e**m**ove). But that won't work for a directory; we'll need to delete recursively with `rm -r`:
+
+	$ rm -r workshops
+
+You may get prompted if it's okay to delete certain files; you can confirm by entering `y` and pressing enter.
+
+Be _very_ careful when using `rm`! When you delete something, it's gone forever. No trash bin here. (Side note, this is the origin of the `rm -rf /` joke, if you're familiar with it. Maybe you can see why now.)
 	
 ## Package Managers: apt
-
 On Windows and Ubuntu Linux (but not on Mac), you should by default have the ``apt`` package manager installed. This can be used to get command-line utilities. We'll get a few fun ones and then demonstrate how they work.
 
 	$ sudo apt install lolcat
