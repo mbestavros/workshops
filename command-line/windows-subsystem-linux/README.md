@@ -115,7 +115,7 @@ You're effectively running full Ubuntu now, and it gets its own updates like any
 sudo apt update && sudo apt upgrade
 ```
 
-Keep in mind this will require WiFi, and can take some time.
+Keep in mind this will require WiFi, and will take a lot of time on a fresh Ubuntu install. Set aside at least 20 minutes.
 
 You may get some boilerplate prompt if this is your first time using `sudo`, which you should just accept. You will be prompted for your Linux password (remember, this is the new one you created as part of setup). When you hit enter, it'll prompt you with all the packages you'll be updating once they've been fetched, and likely ask for confirmation. You can do this by entering `y` and hitting Enter.
 
