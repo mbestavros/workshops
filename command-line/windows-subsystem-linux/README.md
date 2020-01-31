@@ -21,8 +21,8 @@ The Windows components needed to run WSL are not enabled by default, so we'll ne
 
 First, open an administrator `Powershell` terminal:
 - Right-click your Windows button
-- Find and click on "Powershell (Admin)"
-- Click "Allow" on the Administrator prompt.
+- Find and click on "Windows PowerShell (Admin)"
+- Click "Yes" on the Administrator prompt.
 
 Then, copy and paste this line into the Powershell terminal, and hit Enter:
 
@@ -50,11 +50,15 @@ When you plug in your flash drive, copy the file called `CanonicalGroupLimited.U
 ### Manually installing a Linux distro
 Once you've downloaded (or moved, as will be the case during TechTogether) the install image (the Ubuntu `.appx` file), you're ready to manually install WSL!
 
-You'll need to open a `Powershell` prompt, just like during the first step -- right click on your Windows button, then click `Powershell`.
+You'll need to open a `Powershell` prompt, just like during the first step -- right click on your Windows button, then click `Powershell`. (It doesn't need to be an admin prompt. Just click on `Windows PowerShell`.)
 
-Then, you'll need to navigate to your Downloads folder. **include commands to cd in admin/non admin here**
+Then, you'll need to navigate to your Downloads folder. Enter this command, then press enter:
 
-Once you're in your Downloads folder **insert how people can tell**, you'll want to install the image using this command:
+```powershell
+cd Downloads
+```
+
+Once you're in your Downloads folder (the prompt should say something like `PS C:\Users\<your user name>\Downloads>`), you'll want to install the image using this command:
 
 ```powershell
 Add-AppxPackage .\CanonicalGroupLimited.Ubuntu18.04onWindows_1804.2018.817.0_x64__79rhkp1fndgsc.appx
