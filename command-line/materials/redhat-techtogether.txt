@@ -1,0 +1,9 @@
+You're getting the hang of this, aren't you?
+
+Come check out what Red Hat has to offer at TechTogether 2020! We've got a lounge, and a few more great workshops to check out:
+- Git
+- Patternfly
+
+We hope you have fun!
+
+#techtogether2020

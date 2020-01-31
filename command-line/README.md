@@ -38,7 +38,6 @@ Type `ls`, then press Enter. You'll see a list of all the files and folders in y
 Hooray! You've just learned your first command. `ls` is shorthand for "list" (your files), and it does exactly that -- it lists all the files in your current directory. Keep that in your back pocket -- you'll probably want to use it a lot.
 
 ### Folder Structure
-
 Linux machines all have file paths that start from root or `/`. But where are we relative to that? Time to learn a new command!
 
 If you type in `pwd`, you'll see the current working directory. (**p**rint **w**orking **d**irectory)
@@ -50,11 +49,12 @@ Like mentioned above, we're currently in our "home" directory. This can vary a b
 
 Since the home directory is accessed quite frequently, it's shortened to `~`. From now on, we'll refer to folders as directores and we'll call your home directory `/home/username`. 
 
+### Navigation
 Now, let's learn a new command: `cd`. This moves between directory (it's shorthand for **c**hange **d**irectory). Let's try it out:
 
 	$ cd ~
 
-That will navigate to your home directory. I can now type:
+That will navigate to your home directory. You can now type:
 
 	$ pwd
 	/home/username
@@ -64,162 +64,161 @@ to see the directory you're currently in. Nothing has changed from before, since
 Now, let's change directories for real. Go into the `workshops` directory using `cd workshops`. Now, if you type `pwd`, you'll see that our directory has changed:
 
 	$ pwd
-	/home/username/builds-workshops
+	/home/username/workshops
 	
-Cool! Let's navigate one directory deeper, into the ``command_line/`` directory. This is the subdirectory of the repo you're currently reading this on! Let's explore what else we have in this directory using `ls`:
+Cool! Let's navigate one directory deeper, into the `command-line` directory. This is the subdirectory of the repo you're currently reading this on! Let's explore what else we have in this directory using `ls`:
 
-	$ cd command_line
+	$ cd command-line
 	$ ls
-	cheat_sheet.md
-	cover_photo.jpg
-	Description.md
-	me
+	materials
+	windows-subsystem-linux
 	README.md
-	
-Let's see what's in the `me/` directory. Navigate in using `cd` and type `ls` to get the folder structure.
 
-
-	$ cd me
-	$ ls
-	hello.txt
-	projects/
-	
-We've been navigating deeper into the directory structure. What if we want to go up? Turns out the command is pretty simple. Using ``cd ..`` will take you to the parent directory. (We'll explain more about this in a bit.)
+We've been navigating deeper into the directory structure. What if we want to go back up? Turns out the command is pretty simple. Using `cd ..` will take you to the parent directory. (We'll explain more about this in a bit.)
 
 	$ pwd
-	/home/username/builds-workshops/command_line/me
+	/home/username/workshops/command-line
 	$ cd ..
 	$ pwd
-	/home/username/builds-workshops/command_line
+	/home/username/workshops
 	
-We can also use a relative file path to get where we want. It looked like there was a ``projects/`` subdirectory under the ``me`` directory, so let's go there directly:
+We can also use a relative file path to get where we want. It looked like there was a `projects/` subdirectory under the `command-line` directory -- let's go there directly:
 
-	$ cd me/projects
+	$ cd command-line/materials
+	$ pwd
+	/home/username/workshops/command-line/materials
 	$ ls
-	supersecretproject.txt
+	redhat-techtogether.txt
 
-Oh look! There's a super secret file. How do I view that? I do the following:
+Hey, look! There's a text file. Hmm... what does it say? How can I view it?
 
-	$ cd projects
-	$ cat supersecretproject.txt
+	$ cat redhat-techtogether.txt
 
-I used a new command `cat` which simply prints the contents of a file. Let's go and change the name of that file. To do this we can use the `mv` (move) command which is the way you rename files.
+We just used a new command, `cat`. It simply prints the contents of a file. 
 
-	$ mv supersecretproject.txt notsosecretanymore.txt
+Let's rename that file. To do this, we can use the `mv` (move) command:
 
-Ok, we've learned a lot so let's recap.
+	$ mv redhat-techtogether.txt renamed.txt
+
+You can think about this as though you're moving a file to a new file in the same directory with a new name.
+
+Now, if you `ls`, you'll see the newly-renamed file:
+
+	$ ls
+	renamed.txt
+
+Nice! We've learned a lot so let's recap.
 
 #### ls
 List the files and directories in a your current working directory.
 
 	$ ls
-	hello.txt projects
+	renamed.txt
 
 #### pwd
 List the current working directory
 
 	$ pwd
-	/home/username/builds-workshops/command_line/me
+	/home/username/workshops/command-line/materials
 
 #### cd
-Move into different folders
+Move into different folders, or move up a directory
 
-	$ cd projects
+	$ cd ..
+	$ cd materials
 
 #### cat
 Print out the contents of a file.
 
-	$ cat supersecretproject.txt
+	$ cat renamed.txt
 
 #### mv
 Rename or move a file
 
-	$ mv supersecretproject.txt notsosecretanymore.txt
+	$ mv renamed.txt renamedagain.txt
 
 ### Hidden Files
 
-Some files in UNIX-based systems are hidden. Hidden files start with a `.`, to see them type `ls -a`. The `-a` is what's called a flag. It's used to denote special options for a command. First let's make sure we're in the projects directory.
+Some files in UNIX-based systems are hidden. Hidden files start with a `.`; you can see them by using `ls -a`. The `-a` is what's called a flag. It's used to denote special options for a command. First, let's make sure we're in the `materials` directory.
 
 	$ pwd
-	/home/username/builds-workshops/command_line/me/projects
+	/home/username/workshops/command-line/materials
 	$ ls -a
 	.                           .betyoudidntseethisfile.txt
-	..                          supersecretproject.txt
+	..                          renamedagain.txt
 
-Wow! We have three secret files. You'll notice there are two secret files that are just `.` and `..`, these files are actually directories!
+Wow! We have three secret files. You'll notice there are two secret files that are just `.` and `..` -- those files are actually directories!
 
 The `.` directory is the current directory. If you type:
 
 	$ pwd
-	/home/username/builds-workshops/command_line/me/projects
+	/home/username/workshops/command-line/materials
 	$ cd .
 	$ pwd
-	/home/username/builds-workshops/command_line/me/projects
+	/home/username/workshops/command-line/materials
 
 You'll notice you didn't go anywhere! This is because you changed directories into the current directory.
 
-The next directory `..` is used to denote one directory up. Let's test it out:
+The next directory, `..`, is used to denote one directory up. Let's test it out:
 
 	$ cd ..
 	$ pwd
-	/home/username/builds-workshops/command_line/me
+	/home/username/workshops/command-line
 
 We've moved one directory up! This is the same command we used before: we were essentially navigating into the universal "up" directory that is a part of all UNIX directories. 
 
-Now let's address the elephant in the room, `.betyoudidntseethisfile.txt`. Let's cat it out.
+Now let's address the elephant in the room, `.betyoudidntseethisfile.txt`. Let's `cat` it out.
 
-	$ cd projects
+	$ cd materials
 	$ cat .betyoudidntseethisfile.txt
 
-Wow! It's so easy to hide files in unix based systems.
+Wow! It's so easy to hide files in Unix based systems.
 
 You should now be pretty comfortable with navigating around your filesystem using UNIX commands. Chances are a lot of your interaction with the command line will be using these commands. Now, we'll move on to some more advanced topics, starting with how to edit files with a text editor.
 
-### Editing Files Using a Command Line Text Editor
+## Editing Files Using a Command Line Text Editor
 
 Okay, how about actually working with files instead of just navigating around and looking at them? This is where we start learning how to use Vim, a command line text editor.
 
-Let's open up supersecretproject.txt:
+Let's open up `renamedagain.txt`:
 
-	$ vim supersecretproject.txt
+	$ vim renamedagain.txt
 	
-By default, Vim only looks at the file, and will not let you make changes yet. You can move the cursor around using the arrow keys. When you're ready to start editing, press ``i`` (for Insert) to start changing text. 
+By default, Vim only looks at the file, and will not let you make changes yet. You can move the cursor around using the arrow keys. When you're ready to start editing, press `i` (for Insert) to start changing text. 
 
-When you're done, you'll need to save and exit. This can be done by pressing the escape key, which takes you back to the default view mode. To give a command, we use the colon key, and then type a command. To exit Vim and save the file you're working on, type ``:wq!``
+When you're done, you'll need to save and exit. This can be done by pressing the escape key, which takes you back to the default view mode. To give a command, we use the colon key, and then type a command. To exit Vim and save the file you're working on, type ``:wq!` (short for "**w**rite and **q**uit". The exclamation mark is to ignore any warnings.)
 
 You can use the `cat` command to see your edited file.
 
-Vim is extremely powerful, and many people swear by it. I find it most useful to make small edits to things when I'm already in the command line; if I'm doing something more substantive, I'll use Sublime Text.
+Vim is extremely powerful, and many people swear by it. I find it most useful to make small edits to things when I'm already in the command line; if I'm doing something more substantive, I'll use my code editor (I prefer VS Code).
 
 ### SSH and SCP
 
-Now, let's learn about two very useful tools: ``ssh`` and ``scp``. ``ssh`` (short for "secure shell") is basically remote login: it allows a UNIX-based machine to connect to another UNIX-based machine and issue commands remotely. This is the command we use to interact with the CSA servers here at BU. In fact, let's try logging in using ``ssh`` right now:
+Now, let's learn about two very useful tools: ``ssh`` and ``scp``. ``ssh`` (short for "secure shell") is basically remote login: it allows a UNIX-based machine to connect to another UNIX-based machine and issue commands remotely. If you're a BU student, this is how you interact with the CSA servers here at BU. In fact, let's try logging in using ``ssh`` right now:
 
 	$ ssh [your_bu_username]@csa2.bu.edu
+
+(If you're not a BU student, you'll just need to substitute the server address for some other machine you can SSH into. We unfortunately don't have one to demonstrate.)
 	
 This will begin the process of remotely logging you into the CSA2 lab machine. Assuming you've already set an account up, you'll just need to enter your BU credentials and you're all set to go. (Don't worry if your password doesn't show up in the terminal window; that's intended behavior).
 
 You'll be presented with your CSA home directory. This is a UNIX system, so all the commands you've learned up to here still work! Explore around a little bit. When you're ready to go back to your local machine, just type ``exit``. The command history will clear, but you should still be in the same directory you started ``ssh`` from.
 
-Now, let's learn how to move a file from our local machine to ``csa2`` using ``scp`` (short for secure copy). This is especially useful if you have, for example, a homework file that you need to submit using ``gsubmit`` (which will also be covered a bit later on).
+Now, let's learn how to move a file from our local machine to ``csa2`` using ``scp`` (short for secure copy). This is especially useful if you have, for example, a homework file that you need to submit using ``gsubmit``.
 
-We have our text file supersecretproject.txt in our current directory. Let's move it to the home directory on ``csa2`` with this command:
+We have our text file `renamedagain.txt` in our current directory. Let's move it to the home directory on ``csa2`` with this command:
 
-	$ scp supersecretproject.txt [your_bu_username]@csa2.bu.edu:~
+	$ scp renamedagain.txt [your_bu_username]@csa2.bu.edu:~
 
 Just like with SSH, you'll be prompted for your login info. Once entered, it should copy up. Now, if we log in to ``csa2`` using ``ssh``, we should see your file right there!
 
 You can customize the remote directory you send the file to by changing the file path after the colon. Note, however, that the path must exist *before* you send the file up.
 
-### gsubmit
-
-I won't dive into the specifics of ``gsubmit`` here; you can find all you need at [this link](http://cs-people.bu.edu/lapets/320-2015-fal/s.php?#A). Your workflow will differ slightly; you will use the terminal to copy your files up using ``scp``, use ``ssh`` to log into the CSA machines, assemble your files as directed above, and then use the ``gsubmit`` command. Note that entering this command counts as a homework submission, so don't test this out until you have a reason to do so.
-
-### Symlinks (Primarily useful for Windows Linux users)
+### Symlinks
 
 Exit out of CSA if you haven't already, and go back to your home directory. Symlinks (short for "symbolic links") are essentially links to another file or directory on your file system. They act like whatever they point to.
 
-Learning how to use this isn't exceptionally important for Mac or Linux users, but for Windows users, it's practically essential. Because of the way the Linux subsystem is implemented, Windows does not have direct access to the Linux filesystem. This means that any files we create in the Linux filesystem can only be used within Linux--however, any Windows files can be accessed by everyone. Thus, it is most useful to simply use Linux to interact with Windows files. Unfortunately, the file path for the Windows filesystem is convoluted, and tedious to use all the time. The solution is simple: create a symlink within your Linux home directory that links to your Windows home directory. Boom, you have direct access to all your Windows files.
+Symlinks are very handy for WSL users. Because of the way the Linux subsystem is implemented, Windows does not have direct access to the Linux filesystem. This means that any files we create in the Linux filesystem can only be used within Linux--however, any Windows files can be accessed by everyone. Thus, it is most useful to simply use Linux to interact with Windows files. Unfortunately, the file path for the Windows filesystem is convoluted, and tedious to use all the time. The solution is simple: create a symlink within your Linux home directory that links to your Windows home directory. Boom, you have direct access to all your Windows files.
 
 To create the symlink we want (on Windows), we use ``ln -s``:
 
@@ -232,10 +231,9 @@ So, to create a symlink to my user directory in Windows, I would do this:
 	
 This creates a symlink called `windows-home` that links to my Windows user directory. If I navigate inside, I get my Windows home directory! This process can be repeated for any directory you want.
 
+# Customizing your Command Line
 
-# Pimp My Command Line
-
-Now we get into the really fun stuff. These things will allow you to really customize your command line and make it your own.
+Now we get into the really fun stuff: dotfiles. These are configuration files that dictate how your terminal works, and you can customize them deeply.
 
 ## Install a new .bash_profile
 
