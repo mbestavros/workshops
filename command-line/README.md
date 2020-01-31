@@ -231,52 +231,57 @@ So, to create a symlink to my user directory in Windows, I would do this:
 	
 This creates a symlink called `windows-home` that links to my Windows user directory. If I navigate inside, I get my Windows home directory! This process can be repeated for any directory you want.
 
-# Customizing your Command Line
+## Customizing your Command Line
 
-Now we get into the really fun stuff: dotfiles. These are configuration files that dictate how your terminal works, and you can customize them deeply.
+Now we get into the really fun stuff: dotfiles. These are configuration files that dictate how your terminal works, and you can customize them deeply. Plus, it'll give us an opportunity to exercise the skills we've been working on!
 
-## Install a new .bash_profile
+First, we'll need to navigate back to our home directory. Remember how to do that? Good.
 
-Settings for a local UNIX shell user are stored in the .bash_profile file in your home directory. We've included a few example .bash_profile files for you to explore.
+Next, we're going to be editing our dotfile with `vim`. On Linux and Mac, you'll want to edit `.bash_profile`:
 
-For Windows Linux users, you  want to edit the .bashrc file in your home directory instead. The .bash_profile doesn't do anything in WSL. All the changes will be the same, though, regardless if you put them in .bash_profile or .bashrc.
+	$ vim .bash_profile
 
-To install a new .bash_profile, copy the contents into your current ~/.bash_profile (or ~/.bashrc if on Windows)
+On WSL, you'll need to edit `.bashrc`:
 
-	vim .bash_profile (copy the contents)
-	vim ~/.bash_profile (paste into here)
+	$ vim .bashrc
 
-Then refresh bash to make the changes:
+Scroll down to the bottom of the file using your arrow keys. We're going to be appending a few nice quality-of-life touches to our shells.
 
-	source ~/.bash_profile
+Start editing by pressing `i`. You should see `INSERT` on the bottom of your `vim` window.
 
-A shortcut to this is:
+Create a new line with enter. Then, type in the following line:
 
-	. ~/.bash_profile
+```bash
+echo "Welcome to the Linux terminal!"
+```
 
-## Create a shortcut for Sublime Text 3
+This will give you a welcome message when you open up your terminal! It uses the `echo` command (which just "echoes" back whatever you give it as input). Change it to your heart's content!
 
-It would be great if you could switch from the command to Sublime really quickly right? Or open up text using Sublime instead of Vim? We can make that happen, using symlinks!
+As for more functional tweaks, my favorites are these two (enter them on new lines):
 
-On Mac, enter the following (making sure your Sublime install directory is correct):
+```bash
+function cd() { builtin cd "$@" && ls; }
+```
 
-	ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-	
-On Windows, it's similar logic: you just need to find the Windows .exe file associated with the program you want. 
+This makes it such that when you change directories with `cd`, it also lists the files in the new directory. I found myself using `ls` so often after using `cd` that I figured I'd combine them. It's probably one of my favorite small shell tweaks.
 
-	ln -s "[path_to_your_sublime_exe_file]" /usr/local/bin/subl
+If you like, you can do the same thing with `clear` (which we haven't covered yet, but it just clears the console of output) on a new line:
 
-In fact, any Windows .exe file can be run from within the Bash shell! You just need to symlink it to ``/usr/local/bin/[program_name]``.
+```bash
+alias clear="clear && ls"
+```
 
-Now, you can easily launch sublime:
+When you've added what you want to your dotfile, you'll need to save and exit. As a reminder, in `vim`, you can do this by pressing Escape to exit Insert mode, then typing `:wq!` and hitting Enter.
 
-	subl (opens last window)
-	subl . (opens current folder)
-	subl README.md (open this README in sublime)
+Now that your dotfile is done, you'll need to refresh your shell to see the changes. Mac and Linux people can do this with `source ~/.bash_profile`. WSL people will need to exit and restart their shell.
+
+Your shell is now customized! You should see your welcome message when you open up your shell, and if you used any of the advanced `ls` commands, they should work when you use `cd` or `clear`.
+
+If there are any other commands you'd like to run on shell start, you can dump them in your dotfiles. You can do some neat stuff with it.
 	
 ## Package Managers: apt-get
 
-On Windows and Linux (but not on Mac), you should by default have the ``apt-get`` package manager installed. This can be used to get command-line utilities. We'll get a few fun ones and then demonstrate how they work.
+On Windows and Ubuntu Linux (but not on Mac), you should by default have the ``apt-get`` package manager installed. This can be used to get command-line utilities. We'll get a few fun ones and then demonstrate how they work.
 
 	$ sudo apt-get install lolcat
 	$ sudo apt-get install python-pip
@@ -284,7 +289,7 @@ On Windows and Linux (but not on Mac), you should by default have the ``apt-get`
 
 You can get pretty much any command-line utility using apt-get.
 
-## Install lolcat and fortune
+## Install lolcat and fortune (for Mac users)
 
 On Mac, you need the Ruby gem installer to install lolcat. To install gem:
 
@@ -334,36 +339,11 @@ Type the following for interesting quotes:
 
 	$ echo fortune | cowsay | lolcat
 
+If you're feeling _really_ wild, put that command as your welcome message in your dotfile. Then, you'll get a fortune every time you open your terminal!
+
 And that's a wrap! Hopefully you found this workshop helpful. Practice and tinker in your spare time! You can do lots of cool stuff with the command line.
 
-Included below are some even more advanced topics for people who want to experiment even further. In particular, the ssh-keygen method is really cool. (I do not personally use tmux, so I will not teach it in this version of the workshop.)
-
-
-### Tmux and Shortcuts
-
-Go to the `command_line/` folder you cloned earlier and do an `ls -a`. This folder contains the following hidden files:
-
-	.bash_profile
-	.tmux.conf
-
-## Configure tmux
-
-To install the `.tmux.conf`:
-
-	cp .tmux.conf ~/
-
-Then refresh tmux:
-
-	tmux source-file ~/.tmux.conf
-
-Now start a tmux session with:
-
-	tmux
-	Ctrl-a - (split diagonally)
-	Ctrl-a | (split vertically)
-	Ctrl-a [Arrow_key] (move between panes)
-	exit (quits tmux)
-	
+If you're a BU student, I've left in an `ssh-keygen` guide below to make logging into CSA even easier. It's from prior versions of the workshop, and I won't be covering it live.
 
 ## Login to CSA without a password
 
