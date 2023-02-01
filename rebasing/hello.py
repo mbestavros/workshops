@@ -1,4 +1,5 @@
 print("Hello, Spark!")
-# WRITE SOME CODE HERE
+print("Spark loading....")
+sleep(5)
+print(100% loaded!)
 print("Bye, Spark!")
-new text
